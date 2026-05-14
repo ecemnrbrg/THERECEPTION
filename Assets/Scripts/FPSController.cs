@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
+    public bool canMove = true;
     public CharacterController controller;
     public Transform playerCamera;
 
+    public float startCameraRotationX = 0f;
     public float moveSpeed = 3f;
     public float mouseSensitivity = 150f;
     public float gravity = -9.81f;
@@ -17,9 +19,11 @@ public class FPSController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        xRotation = 0f;
-        playerCamera.localRotation = Quaternion.identity;
+        xRotation = startCameraRotationX;
+
+        playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
+
     void Update()
     {
         Look();
@@ -29,12 +33,6 @@ public class FPSController : MonoBehaviour
 
     void Look()
     {
-        if (Time.timeSinceLevelLoad < 0.5f)
-        {
-            xRotation = 0f;
-            playerCamera.localRotation = Quaternion.identity;
-            return;
-        }
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -44,19 +42,19 @@ public class FPSController : MonoBehaviour
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         transform.Rotate(Vector3.up * mouseX);
-       
     }
 
     void MovePlayer()
     {
-        
+        if (!canMove)
+            return;
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
 
         controller.Move(move * moveSpeed * Time.deltaTime);
-        
     }
 
     void ApplyGravity()

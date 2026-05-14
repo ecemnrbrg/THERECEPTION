@@ -8,7 +8,7 @@ public class DayIntroManager : MonoBehaviour
     public Image blackPanel;
     public TextMeshProUGUI dayText;
 
-    public float letterDelay = 0.15f;
+    public float letterDelay = 0.25f;
     public float waitAfterText = 1f;
     public float fadeTime = 2f;
 
@@ -36,9 +36,10 @@ public class DayIntroManager : MonoBehaviour
         {
             dayText.text += letter;
 
-            if (typeSound != null)
-            {
-                typeSound.Play();
+            if(typeSound != null && typeSound.clip != null)
+{
+                typeSound.Stop();
+                typeSound.PlayOneShot(typeSound.clip);
             }
 
             yield return new WaitForSeconds(letterDelay);
