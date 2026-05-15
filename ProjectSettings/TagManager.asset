@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Door
   - Note
+  - ShutterButton
   layers:
   - Default
   - TransparentFX
