@@ -67,7 +67,7 @@ public class ShutterInteraction : MonoBehaviour
 
         shutterAnimator.SetTrigger("Open");
 
-        fpsController.canMove = true;
+        //fpsController.canMove = true;
 
         StartCoroutine(StopShutterAnimation());
     }
