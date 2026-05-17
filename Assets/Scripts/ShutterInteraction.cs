@@ -5,6 +5,7 @@ using System.Collections;
 public class ShutterInteraction : MonoBehaviour
 {
     public Camera playerCamera;
+    public GameFlowManager gameFlowManager;
     public float interactDistance = 3f;
     public float stopAfterSeconds = 1.2f;
 
@@ -62,6 +63,8 @@ public class ShutterInteraction : MonoBehaviour
     void OpenShutter()
     {
         shutterOpened = true;
+
+        gameFlowManager.StartFirstCustomerTimer();
 
         shutterText.gameObject.SetActive(false);
 
