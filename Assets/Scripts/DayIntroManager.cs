@@ -7,6 +7,7 @@ public class DayIntroManager : MonoBehaviour
 {
     public Image blackPanel;
     public TextMeshProUGUI dayText;
+    public GameObject crosshair;
 
     public float letterDelay = 0.25f;
     public float waitAfterText = 1f;
@@ -48,6 +49,11 @@ public class DayIntroManager : MonoBehaviour
         yield return new WaitForSeconds(waitAfterText);
 
         dayText.gameObject.SetActive(false);
+
+        if (crosshair != null)
+        {
+            crosshair.SetActive(true);
+        }
 
         float timer = 0f;
 

@@ -4,6 +4,7 @@ public class CustomerMove : MonoBehaviour
 {
     public Transform targetPoint;
     public float moveSpeed = 1f;
+    public DialogueManager dialogueManager;
 
     private bool arrived = false;
 
@@ -21,7 +22,7 @@ public class CustomerMove : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPoint.position) < 0.05f)
         {
             arrived = true;
-            Debug.Log("Customer arrived.");
+            dialogueManager.StartDialogue();
         }
     }
 }
